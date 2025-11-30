@@ -1,44 +1,27 @@
 import java.util.HashMap;
 
-public class MakeSumDivisibleByP {
+class MakeSumDivisibleByP {
     public int minSubarray(int[] nums, int p) {
-        if (nums == null)
-            return 0;
-        HashMap<Integer, Integer> map = new HashMap<>();
-        int sum = 0;
-        for (int num : nums) {
-            sum += num;
-        }
-        if (sum % p == 0)
-            return 0;
+        long total = 0;
+        for (int x : nums) total += x;
+        int r = (int) (total % p);
+        if (r == 0) return 0;
+
+        HashMap<Integer, Integer> last = new HashMap<>();
+        last.put(0, -1);
+        int prefix = 0;
+        int minLen = nums.length;
+
         for (int i = 0; i < nums.length; i++) {
-            map.put(nums[i], i);
-        }
-        int mod = sum % p;
-        if (map.containsKey(mod)) {
-            return 1;
-        }
-        int count = 0;
-        for (int key : map.keySet()) {
-            int complement = p - key;
-            if (map.containsKey(complement)) {
-                map.remove(complement);
-                map.remove(key);
-                sum =0;
-                for (int num : map.keySet()) {
-                    sum += num;
-                }
-                if (sum % p == 0) {
-                    return count + 2;
-                }
-                count++;
+            prefix = (prefix + nums[i]) % p;
+            int need = (prefix - r + p) % p;
+            if (last.containsKey(need)) {
+                minLen = Math.min(minLen, i - last.get(need));
             }
+            last.put(prefix, i);
         }
-        return -1;
+
+        return minLen == nums.length ? -1 : minLen;
     }
 
-    public static void main(String[] args) {
-        MakeSumDivisibleByP makeSumDivisibleByP = new MakeSumDivisibleByP();
-        System.out.println(makeSumDivisibleByP.minSubarray(new int[]{6,3,5,2}, 9));
-    }
 }
