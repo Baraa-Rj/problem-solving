@@ -41,7 +41,8 @@ public class TwoSum {
 
 
     public static void main(String[] args) {
-        TwoSum twoSum = new TwoSum();
-        System.out.println(Arrays.toString(twoSum.twoSum(new int[]{3,4,5,6}, 7)));
+      String[] array = {"art","pots","tops","cat","stop","hat"};
+      Arrays.sort(array);
+      System.out.println(Arrays.toString(array));
     }
 }
