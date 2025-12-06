@@ -1,0 +1,23 @@
+import java.util.Arrays;
+import java.util.HashMap;
+
+public class TwoSum {
+    public int[] twoSum(int[] nums, int target) {
+        if (nums == null || nums.length < 2) return new int[]{-1, -1};
+        java.util.HashMap<Integer, Integer> map = new java.util.HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int need = target - nums[i];
+            if (map.containsKey(need)) {
+                return new int[]{map.get(need), i};
+            }
+            map.put(nums[i], i);
+        }
+        return new int[]{-1, -1};
+    }
+
+
+    public static void main(String[] args) {
+        TwoSum twoSum = new TwoSum();
+        System.out.println(Arrays.toString(twoSum.twoSum(new int[]{3,4,5,6}, 7)));
+    }
+}
