@@ -26,7 +26,6 @@ public class GroupAnagram {
             for (char c : s.toCharArray()) {
                 count[c - 'a']++;
             }
-            Arrays.sort(count);
             map.putIfAbsent(Arrays.toString(count), new ArrayList<>());
             map.get(Arrays.toString(count)).add(s);
         }
