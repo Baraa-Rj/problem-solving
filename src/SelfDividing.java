@@ -10,12 +10,12 @@ public class SelfDividing {
             boolean isSelfDividing = true;
 
             while (temp > 0) {
-                int digit = temp % 10;     // get current digit
+                int digit = temp % 10;
                 if (digit == 0 || number % digit != 0) {
                     isSelfDividing = false;
                     break;
                 }
-                temp /= 10;                // drop digit
+                temp /= 10;
             }
 
             if (isSelfDividing) {
